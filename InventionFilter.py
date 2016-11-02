@@ -62,18 +62,23 @@ def get_data():
         username = item_1.iloc[0, 1].replace(u' ', u'')
         type_invention = item_1.iloc[0, 6].replace(u' ', u'')
         date_shouli = item_1.iloc[0, 5]
+        backup = item_1.iloc[0, 8]
+        backup_1 = 0
+        if pandas.notnull(backup):
+            backup_1 = backup[0:2]
 
         if department == department_to_filter:
             if username in list_username:
-                if type_invention == '发明'.decode('gbk'):
-                    data_display['%s' % username]['发明提交数量'.decode('gbk')] += 1
-                if type_invention == '实用新型'.decode('gbk'):
-                    data_display['%s' % username]['实用新型提交数量'.decode('gbk')] += 1
                 if pandas.notnull(date_shouli):
                     if type_invention == '发明'.decode('gbk'):
                         data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
                     if type_invention == '实用新型'.decode('gbk'):
                         data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
+                if backup_1 not in ['放弃'.decode('gbk'), '15'.decode('gbk')]:
+                    if type_invention == '发明'.decode('gbk'):
+                        data_display['%s' % username]['发明提交数量'.decode('gbk')] += 1
+                    if type_invention == '实用新型'.decode('gbk'):
+                        data_display['%s' % username]['实用新型提交数量'.decode('gbk')] += 1
     dataframe_data = pandas.DataFrame(data_display).T
     dataframe_data.to_csv(filename_output, encoding='gbk')
     tkMessageBox.showinfo('提示'.decode('gbk'), '处理%s的结果已经生成，请去%s路径查看.如果无需其他动作，请点击退出按钮退出程序'.decode('gbk') % (department_to_filter, dir_filename_display))
