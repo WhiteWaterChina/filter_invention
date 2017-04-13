@@ -10,6 +10,7 @@ import tkMessageBox
 import  tkFileDialog
 import xlsxwriter
 import time
+import os
 
 
 filename_original = unicode()
@@ -17,25 +18,33 @@ filename_original = unicode()
 listDivisionName=['测试一处'.decode('gbk'), '测试二处'.decode('gbk'), '测试三处'.decode('gbk'), '测试四处'.decode('gbk'), '测试五处'.decode('gbk'), '测试六处'.decode('gbk')]
 listTitle = ['发明提交数量'.decode('gbk'), '发明受理数量'.decode('gbk'), '实用新型提交数量'.decode('gbk'), '实用新型受理数量'.decode('gbk')]
 root = Tkinter.Tk()
-root.title("专利结果过滤工具".decode('gbk'))
-root.geometry('400x300')
+root.title("专利结果过滤工具-所有处".decode('gbk'))
+#root.geometry('400x300')
 #root.iconbitmap('logo.ico')
 root.resizable(width=True, height=True)
 var_char_entry_filename_need_filter = Tkinter.StringVar()
+var_char_entry_filename_after_filter = Tkinter.StringVar()
 
 
 def get_filename():
     global filename_original
-    filename_iometer = tkFileDialog.askopenfilename()
-    var_char_entry_filename_need_filter.set(filename_iometer)
-    filename_original = filename_iometer
+    filename_invention = tkFileDialog.askopenfilename()
+    var_char_entry_filename_need_filter.set(filename_invention)
+    filename_original = filename_invention
+
+
+def set_filename():
+    global dir_filename_display
+    dir_filename_display = tkFileDialog.askdirectory().replace('/', '\\')
+    var_char_entry_filename_after_filter.set(dir_filename_display)
 
 
 def get_data():
     print time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
     filename_input = filename_original
     timestamp = time.strftime('%Y%m%d', time.localtime())
-    WorkBook = xlsxwriter.Workbook("测试验证部个人专利完成情况统计-%s.xlsx".decode('gbk') % timestamp)
+    filename_final = os.path.join(dir_filename_display, "测试验证部个人专利完成情况统计-%s.xlsx".decode('gbk') % timestamp)
+    WorkBook = xlsxwriter.Workbook(filename_final)
     formatOne = WorkBook.add_format()
     formatOne.set_border(1)
     for item in listDivisionName:
@@ -93,26 +102,18 @@ def get_data():
             sheet_now.write(line_count, 4, data_display['%s' % item]['实用新型受理数量'.decode('gbk')], formatOne)
 
     print time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-    tkMessageBox.showinfo('提示'.decode('gbk'), '处理结果已经当前文件夹下生成.如果无需其他动作，请点击退出按钮退出程序'.decode('gbk'))
+    tkMessageBox.showinfo('提示'.decode('gbk'), '处理结果已经保存到文件%s中.如果无需其他动作，请点击退出按钮退出程序'.decode('gbk') % filename_final)
     WorkBook.close()
 
+Tkinter.Label(root, text='请在如下选择需要处理的专利文件'.decode('gbk'), bg='Red').grid(row=0, column=0, columnspan=5, padx=10, pady=5)
+Tkinter.Entry(root, textvariable=var_char_entry_filename_need_filter).grid(row=1, column=0, columnspan=4, padx=5, pady=5, sticky='we')
+Tkinter.Button(root, text='选择文件'.decode('gbk'), command=get_filename).grid(row=1, column=4, padx=5, pady=5)
 
-frame_middle = Tkinter.Frame(root, height=20)
-frame_middle.pack(side=Tkinter.TOP)
-frame_middle_top = Tkinter.Frame(frame_middle, height=40)
-frame_middle_top.pack()
-frame_middle_bottom = Tkinter.Frame(frame_middle, height=20)
-frame_middle_bottom.pack()
-Tkinter.Label(frame_middle_top, text='请在如下选择需要处理的专利文件'.decode('gbk'), bg='Red').pack()
+Tkinter.Label(root, text='请在如下选择输出结果的目录'.decode('gbk'), bg='Red').grid(row=2, column=0, columnspan=5, padx=10, pady=5)
+Tkinter.Entry(root, textvariable=var_char_entry_filename_after_filter).grid(row=3, column=0, columnspan=4, padx=5, pady=5, sticky='we')
+Tkinter.Button(root, text='选择目录'.decode('gbk'), command=set_filename).grid(row=3, column=4, padx=5, pady=5)
 
-Tkinter.Entry(frame_middle_bottom, textvariable=var_char_entry_filename_need_filter, width=40).pack(side=Tkinter.LEFT)
-Tkinter.Button(frame_middle_bottom, text='选择文件'.decode('gbk'), command=get_filename, width=20).pack(side=Tkinter.RIGHT)
-
-
-frame_bottom = Tkinter.Frame(root, height=20)
-frame_bottom.pack()
-
-Tkinter.Button(frame_bottom, text='GO'.decode('gbk'), command=get_data, width=20,).pack(side=Tkinter.LEFT)
-Tkinter.Button(frame_bottom, text='退出'.decode('gbk'), width=20, command=root.destroy).pack(side=Tkinter.LEFT)
+Tkinter.Button(root, text='GO'.decode('gbk'), command=get_data).grid(row=4, column=0, columnspan=2, padx=5, pady=5, sticky='wesn')
+Tkinter.Button(root, text='退出'.decode('gbk'), command=root.destroy).grid(row=4, column=3, columnspan=2, padx=5, pady=5, sticky='wesn')
 
 Tkinter.mainloop()
