@@ -7,10 +7,8 @@
 ##
 ## PLEASE DO "NOT" EDIT THIS FILE!
 ###########################################################################
-"""这个工具的作用是过滤部门的专利总览表，然后统计出g各处个人的专利完成情况。分为四列：发明提交、发明受理、实用新型提交、实用新型受理。输入文档
-必须是csv格式的，且只有一个sheet。输出文件名为《测试验证部测试个人专利完成情况统计.csv》,依据不同的处别而不同在不同的sheet。 本工具基于Python Tkinter制作图形界面。依赖详见import部分。
-打包成exe格式请使用pyinstall,命令为Python pyinstaller.py -F InvertionFilter.py
-"""
+"""这个工具的作用是过滤部门的专利总览表，然后统计出g各处个人的专利完成情况。分为四列：发明提交、发明受理、实用新型提交、实用新型受理。"""
+
 import pandas
 import xlsxwriter
 import time
@@ -122,7 +120,7 @@ class InventionFilterAll(wx.Frame):
 
     def set_filename(self, event):
         global dir_filename_display
-        dir_filename_display_dialog = wx.DirDialog(self, message=u"选择存储目录",style=wx.DD_DEFAULT_STYLE)
+        dir_filename_display_dialog = wx.DirDialog(self, message=u"选择存储目录", style=wx.DD_DEFAULT_STYLE)
         if dir_filename_display_dialog.ShowModal() == wx.ID_OK:
             dir_filename_display = dir_filename_display_dialog.GetPath()
 #            .replace('/', '\\')
@@ -135,16 +133,16 @@ class InventionFilterAll(wx.Frame):
         timestamp = time.strftime('%Y%m%d', time.localtime())
         filename_display = "测试验证部个人专利完成情况统计-%s.xlsx".decode('gbk') % timestamp
         filename_final = os.path.join(dir_filename_display, filename_display)
-        WorkBook = xlsxwriter.Workbook(filename_final)
-        formatOne = WorkBook.add_format()
-        formatOne.set_border(1)
+        workbook_to_write = xlsxwriter.Workbook(filename_final)
+        formatone = workbook_to_write.add_format()
+        formatone.set_border(1)
         for item_sheet_one in listDivisionName:
-            WorkBook.add_worksheet(item_sheet_one)
+            workbook_to_write.add_worksheet(item_sheet_one)
         for department_to_filter in listDivisionName:
-            sheet_now = WorkBook.get_worksheet_by_name(department_to_filter)
+            sheet_now = workbook_to_write.get_worksheet_by_name(department_to_filter)
             sheet_now.set_column('B:E', 15)
             for i in range(1, len(listTitle) + 1):
-                sheet_now.write(0, i, listTitle[i - 1], formatOne)
+                sheet_now.write(0, i, listTitle[i - 1], formatone)
             list_username = []
 
             file_name = xlrd.open_workbook(filename_input, encoding_override='cp936')
@@ -177,7 +175,7 @@ class InventionFilterAll(wx.Frame):
                 department = sheet_filter_one.cell(item_1, 3).value.replace(u' ', u'')
                 username = sheet_filter_one.cell(item_1, 6).value
                 type_invention = sheet_filter_one.cell(item_1, 4).value.replace(u' ', u'')
-                shouli_or_not =sheet_filter_one.cell(item_1, 8).value
+                shouli_or_not = sheet_filter_one.cell(item_1, 8).value
                 if department == department_to_filter:
                     if username in list_username:
                         if shouli_or_not != 'None':
@@ -203,16 +201,16 @@ class InventionFilterAll(wx.Frame):
 
             for index, item_sheet_one in enumerate(list_username):
                 line_count = index + 1
-                sheet_now.write(line_count, 0, item_sheet_one, formatOne)
-                sheet_now.write(line_count, 1, data_display['%s' % item_sheet_one]['发明提交数量'.decode('gbk')], formatOne)
-                sheet_now.write(line_count, 2, data_display['%s' % item_sheet_one]['发明受理数量'.decode('gbk')], formatOne)
-                sheet_now.write(line_count, 3, data_display['%s' % item_sheet_one]['实用新型提交数量'.decode('gbk')], formatOne)
-                sheet_now.write(line_count, 4, data_display['%s' % item_sheet_one]['实用新型受理数量'.decode('gbk')], formatOne)
+                sheet_now.write(line_count, 0, item_sheet_one, formatone)
+                sheet_now.write(line_count, 1, data_display['%s' % item_sheet_one]['发明提交数量'.decode('gbk')], formatone)
+                sheet_now.write(line_count, 2, data_display['%s' % item_sheet_one]['发明受理数量'.decode('gbk')], formatone)
+                sheet_now.write(line_count, 3, data_display['%s' % item_sheet_one]['实用新型提交数量'.decode('gbk')], formatone)
+                sheet_now.write(line_count, 4, data_display['%s' % item_sheet_one]['实用新型受理数量'.decode('gbk')], formatone)
 
         print time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         diag_finish = wx.MessageDialog(None, '处理结果已经保存到文件%s《%s》中.如果无需其他动作，请点击退出按钮退出程序'.decode('gbk')  % (dir_filename_display, filename_display), '提示'.decode('gbk'), wx.OK |wx.ICON_INFORMATION | wx.STAY_ON_TOP  )
         diag_finish.ShowModal()
-        WorkBook.close()
+        workbook_to_write.close()
 
 
 if __name__ == '__main__':

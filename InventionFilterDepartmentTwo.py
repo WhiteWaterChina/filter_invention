@@ -74,7 +74,7 @@ def get_data():
     filename_output = os.path.join(dir_filename_display,
                                    "测试验证部%s个人专利完成情况统计-%s.xlsx".decode('gbk') % (department_to_filter, timestamp))
     WorkBook = xlsxwriter.Workbook(filename_output)
-    SheetOne = WorkBook.add_worksheet('测试验证部%s个人专利完成情况统计'.decode('gbk'))
+    SheetOne = WorkBook.add_worksheet('测试验证部%s个人专利完成情况统计'.decode('gbk') % department_to_filter)
     format = WorkBook.add_format()
     format.set_border(1)
     sum_line = 0
@@ -106,13 +106,17 @@ def get_data():
         data_display['%s' % name]['实用新型受理数量'.decode('gbk')] = 0
     # file_name = pandas.read_csv(filename_input, sep=',', header=1, encoding='gbk', na_filter=True, chunksize=1)
     file_name = xlrd.open_workbook(filename_input, encoding_override='cp936')
-    sheet_filter = file_name.sheet_by_index(0)
-    total_rows = sheet_filter.nrows
-    for item_1 in range(1, total_rows):
-        department = sheet_filter.cell(item_1, 3).value.replace(u' ', u'')
-        username = sheet_filter.cell(item_1, 6).value.replace(u' ', u'')
-        type_invention = sheet_filter.cell(item_1, 4).value.replace(u' ', u'')
-        shouli_or_not = sheet_filter.cell(item_1, 8).value
+    sheet_filter_one = file_name.sheet_by_index(0)
+    total_rows_one = sheet_filter_one.nrows
+
+    sheet_filter_two = file_name.sheet_by_index(1)
+    total_rows_two = sheet_filter_two.nrows
+
+    for item_1 in range(1, total_rows_one):
+        department = sheet_filter_one.cell(item_1, 3).value.replace(u' ', u'')
+        username = sheet_filter_one.cell(item_1, 6).value.replace(u' ', u'')
+        type_invention = sheet_filter_one.cell(item_1, 4).value.replace(u' ', u'')
+        shouli_or_not = sheet_filter_one.cell(item_1, 8).value
         if department == department_to_filter:
             if username in ListUsername:
                 if shouli_or_not != 'None':
@@ -124,6 +128,18 @@ def get_data():
                     data_display['%s' % username]['发明提交数量'.decode('gbk')] += 1
                 if type_invention == '新型'.decode('gbk'):
                     data_display['%s' % username]['实用新型提交数量'.decode('gbk')] += 1
+
+    for item_2 in range(1, total_rows_two):
+        department = sheet_filter_two.cell(item_2, 0).value.replace(u' ', u'')
+        username = sheet_filter_two.cell(item_2, 1).value
+        type_invention = sheet_filter_two.cell(item_2, 6).value.replace(u' ', u'')
+        if department == department_to_filter:
+            if username in ListUsername:
+                if type_invention == '发明'.decode('gbk'):
+                    data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
+                if type_invention == '实用新型'.decode('gbk'):
+                    data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
+    SheetOne.set_column("C:F", 15)
     i = 1
     for username in ListUsername:
         SheetOne.write(i, 2, data_display['%s' % username]['发明受理数量'.decode('gbk')])
