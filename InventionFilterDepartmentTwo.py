@@ -72,9 +72,9 @@ def get_data():
     department_to_filter = var_char_combox_department.get()
     timestamp = time.strftime('%Y%m%d', time.localtime())
     filename_output = os.path.join(dir_filename_display,
-                                   "测试验证部%s个人专利完成情况统计-%s.xlsx".decode('gbk') % (department_to_filter, timestamp))
+                                   "%s个人专利完成情况统计-%s.xlsx".decode('gbk') % (department_to_filter, timestamp))
     WorkBook = xlsxwriter.Workbook(filename_output)
-    SheetOne = WorkBook.add_worksheet('测试验证部%s个人专利完成情况统计'.decode('gbk') % department_to_filter)
+    SheetOne = WorkBook.add_worksheet('各组专利完成情况统计'.decode('gbk'))
     format = WorkBook.add_format()
     format.set_border(1)
     sum_line = 0
@@ -154,7 +154,7 @@ def get_data():
 
 Tkinter.Label(root, text='请在如下选择需要处理的处名'.decode('gbk'), bg='Red').grid(row=0, column=0, columnspan=20, padx=5, pady=5)
 box_set_department = ttk.Combobox(root, textvariable=var_char_combox_department,
-                                  values=['测试二处'.decode('gbk')])
+                                  values=['浪潮集团浪潮信息测试验证部测试二处'.decode('gbk')])
 box_set_department.grid(row=1, column=0, columnspan=40, padx=5, pady=5)
 
 Tkinter.Label(root, text='请在如下选择需要处理的专利文件'.decode('gbk'), bg='Red').grid(row=2, column=0, columnspan=20, padx=5, pady=5)

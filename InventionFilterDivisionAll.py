@@ -24,7 +24,7 @@ import xlrd
 DisplayFilename = wx.TextCtrl
 DisplayResultDir = wx.TextCtrl
 filename_original = unicode()
-listDivisionName=['测试一处'.decode('gbk'), '测试二处'.decode('gbk'), '测试三处'.decode('gbk'), '测试四处'.decode('gbk'), '测试五处'.decode('gbk'), '测试六处'.decode('gbk')]
+listDivisionName=['浪潮集团浪潮信息测试验证部测试一处'.decode('gbk'), '浪潮集团浪潮信息测试验证部测试二处'.decode('gbk'), '浪潮集团浪潮信息测试验证部测试三处'.decode('gbk'), '浪潮集团浪潮信息测试验证部测试四处'.decode('gbk'), '浪潮集团浪潮信息测试验证部测试五处'.decode('gbk'), '浪潮集团浪潮信息测试验证部测试六处'.decode('gbk')]
 listTitle = ['发明提交数量'.decode('gbk'), '发明受理数量'.decode('gbk'), '实用新型提交数量'.decode('gbk'), '实用新型受理数量'.decode('gbk')]
 
 
