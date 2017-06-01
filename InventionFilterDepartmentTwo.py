@@ -30,7 +30,7 @@ var_char_entry_filename_after_filter = Tkinter.StringVar()
 TeamLeader = ['贾岛'.decode('gbk'), '潘霖'.decode('gbk'), '韩琳琳'.decode('gbk'), '苗永威'.decode('gbk'),
               '史沛玉'.decode('gbk'), '杨文清'.decode('gbk'), '伯绍文'.decode('gbk'), '迟江波'.decode('gbk'), '李永亮'.decode('gbk'),
               '曹翔'.decode('gbk')]
-# 万浩离职
+
 Member0 = ['贾岛'.decode('gbk'), '李光达'.decode('gbk'), '刘茂峰'.decode('gbk'), '范鹏飞'.decode('gbk'), '谭静静'.decode('gbk'),
            '张文珂'.decode('gbk'), '代如静'.decode('gbk')]
 Member1 = ['潘霖'.decode('gbk'), '刘博'.decode('gbk'), '黄翼'.decode('gbk'), '董喜燕'.decode('gbk'), '郝良晟'.decode('gbk')]
@@ -45,7 +45,7 @@ Member6 = ['伯绍文'.decode('gbk'), '李波'.decode('gbk'), '刘东伟'.decode('gbk'),
            '胥志泉'.decode('gbk'), '赵召'.decode('gbk'), '李壮'.decode('gbk'), '李俊卿'.decode('gbk')]
 Member7 = ['迟江波'.decode('gbk'), '刘浩君'.decode('gbk'), '李彦华'.decode('gbk'), '韩燕燕'.decode('gbk'),
             '梁恒勋'.decode('gbk'), '黄锦盛'.decode('gbk')]
-Member8 = ['李永亮'.decode('gbk'), '李丹6011'.decode('gbk'), '兰太顺'.decode('gbk')]
+Member8 = ['李永亮'.decode('gbk'), '李丹'.decode('gbk'), '兰太顺'.decode('gbk')]
 Member9 = ['曹翔'.decode('gbk'), '康艳丽'.decode('gbk'), '王智仙'.decode('gbk'), '邓振宏'.decode('gbk'), '蔣弦佑'.decode('gbk')]
 
 TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明受理数量'.decode('gbk'), '发明提交数量'.decode('gbk'),
@@ -72,7 +72,7 @@ def get_data():
     department_to_filter = var_char_combox_department.get()
     timestamp = time.strftime('%Y%m%d', time.localtime())
     filename_output = os.path.join(dir_filename_display,
-                                   "%s个人专利完成情况统计-%s.xlsx".decode('gbk') % (department_to_filter, timestamp))
+                                   "%s各组专利完成情况统计-%s.xlsx".decode('gbk') % (department_to_filter, timestamp))
     WorkBook = xlsxwriter.Workbook(filename_output)
     SheetOne = WorkBook.add_worksheet('各组专利完成情况统计'.decode('gbk'))
     format = WorkBook.add_format()
