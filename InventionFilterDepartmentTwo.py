@@ -74,7 +74,7 @@ def get_data():
     filename_output = os.path.join(dir_filename_display,
                                    "%s各组专利完成情况统计-%s.xlsx".decode('gbk') % (department_to_filter, timestamp))
     WorkBook = xlsxwriter.Workbook(filename_output)
-    SheetOne = WorkBook.add_worksheet('各组专利完成情况统计'.decode('gbk'))
+    SheetOne = WorkBook.add_worksheet('各人专利完成情况统计'.decode('gbk'))
     format = WorkBook.add_format()
     format.set_border(1)
     sum_line = 0

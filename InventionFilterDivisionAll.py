@@ -33,7 +33,7 @@ class InventionFilterAll(wx.Frame):
         wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"专利结果过滤工具", pos=wx.DefaultPosition, size=wx.Size(356, 215),
                           style=wx.CAPTION | wx.RESIZE_BORDER | wx.TAB_TRAVERSAL)
 
-        self.SetSizeHintsSz(wx.DefaultSize, wx.DefaultSize)
+        self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
         self.SetForegroundColour(wx.Colour(255, 255, 0))
         self.SetBackgroundColour(wx.Colour(72, 220, 35))
 
@@ -111,7 +111,7 @@ class InventionFilterAll(wx.Frame):
     # Virtual event handlers, overide them in your derived class
     def get_filename(self, event):
         global filename_original
-        filename_invention_dialog = wx.FileDialog(self, message=u"选择专利文件", defaultDir=os.getcwd(), defaultFile="", style=wx.OPEN | wx.MULTIPLE)
+        filename_invention_dialog = wx.FileDialog(self, message="选择专利文件".decode('gbk'), defaultDir=os.getcwd(), defaultFile="")
         if filename_invention_dialog.ShowModal() == wx.ID_OK:
             filename_invention = filename_invention_dialog.GetPath()
             self.DisplayFilename.SetValue(filename_invention)
@@ -120,7 +120,7 @@ class InventionFilterAll(wx.Frame):
 
     def set_filename(self, event):
         global dir_filename_display
-        dir_filename_display_dialog = wx.DirDialog(self, message=u"选择存储目录", style=wx.DD_DEFAULT_STYLE)
+        dir_filename_display_dialog = wx.DirDialog(self, message="选择存储目录".decode('gbk'), style=wx.DD_DEFAULT_STYLE)
         if dir_filename_display_dialog.ShowModal() == wx.ID_OK:
             dir_filename_display = dir_filename_display_dialog.GetPath()
 #            .replace('/', '\\')
