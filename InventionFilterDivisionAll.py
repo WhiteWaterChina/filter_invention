@@ -165,6 +165,7 @@ class InventionFilterAll(wx.Frame):
                         list_username.append(username)
 
             data_display = {}
+            list_status = ["撰写通过".decode('gbk')]
             for name in list_username:
                 data_display['%s' % name] = {}
                 data_display['%s' % name]['发明提交数量'.decode('gbk')] = 0
@@ -176,9 +177,10 @@ class InventionFilterAll(wx.Frame):
                 username = sheet_filter_one.cell(item_1, 6).value
                 type_invention = sheet_filter_one.cell(item_1, 4).value.replace(u' ', u'')
                 shouli_or_not = sheet_filter_one.cell(item_1, 8).value
+                status = sheet_filter_one.cell(item_1, 0).value.strip()
                 if department == department_to_filter:
                     if username in list_username:
-                        if shouli_or_not != 'None':
+                        if shouli_or_not != 'None'or status in list_status :
                             if type_invention == '发明'.decode('gbk'):
                                 data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
                             if type_invention == '新型'.decode('gbk'):
