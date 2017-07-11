@@ -46,7 +46,7 @@ Member6 = ['伯绍文'.decode('gbk'), '李波'.decode('gbk'), '刘东伟'.decode('gbk'),
 Member7 = ['迟江波'.decode('gbk'), '刘浩君'.decode('gbk'), '李彦华'.decode('gbk'), '韩燕燕'.decode('gbk'),
             '梁恒勋'.decode('gbk'), '黄锦盛'.decode('gbk')]
 Member8 = ['李永亮'.decode('gbk'), '李丹'.decode('gbk'), '兰太顺'.decode('gbk')]
-Member9 = ['曹翔'.decode('gbk'), '康艳丽'.decode('gbk'), '王智仙'.decode('gbk'), '邓振宏'.decode('gbk'), '蔣弦佑'.decode('gbk')]
+Member9 = ['曹翔'.decode('gbk')]
 
 TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明受理数量'.decode('gbk'), '发明提交数量'.decode('gbk'),
              '实用新型受理数量'.decode('gbk'), '实用新型提交数量'.decode('gbk')]
@@ -63,7 +63,6 @@ def set_filename():
     global dir_filename_display
     dir_filename_display = tkFileDialog.askdirectory().replace('/', '\\')
     var_char_entry_filename_after_filter.set(dir_filename_display)
-#    filename_display = os.path.join(dir_filter_iometer, "测试验证部测试%s个人专利完成情况统计.csv".decode('gbk') )
 
 
 def get_data():
@@ -98,6 +97,7 @@ def get_data():
                 ListUsername.append((globals()['Member' + str(j)])[k])
                 i += 1
     data_display = {}
+    list_status = ["撰写通过".decode('gbk')]
     for name in ListUsername:
         data_display['%s' % name] = {}
         data_display['%s' % name]['发明提交数量'.decode('gbk')] = 0
@@ -113,32 +113,29 @@ def get_data():
     total_rows_two = sheet_filter_two.nrows
 
     for item_1 in range(1, total_rows_one):
-        department = sheet_filter_one.cell(item_1, 3).value.replace(u' ', u'')
         username = sheet_filter_one.cell(item_1, 6).value.replace(u' ', u'')
         type_invention = sheet_filter_one.cell(item_1, 4).value.replace(u' ', u'')
         shouli_or_not = sheet_filter_one.cell(item_1, 8).value
-        if department == department_to_filter:
-            if username in ListUsername:
-                if shouli_or_not != 'None':
-                    if type_invention == '发明'.decode('gbk'):
-                        data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
-                    if type_invention == '新型'.decode('gbk'):
-                        data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
-                if type_invention == '发明'.decode('gbk'):
-                    data_display['%s' % username]['发明提交数量'.decode('gbk')] += 1
-                if type_invention == '新型'.decode('gbk'):
-                    data_display['%s' % username]['实用新型提交数量'.decode('gbk')] += 1
-
-    for item_2 in range(1, total_rows_two):
-        department = sheet_filter_two.cell(item_2, 0).value.replace(u' ', u'')
-        username = sheet_filter_two.cell(item_2, 1).value
-        type_invention = sheet_filter_two.cell(item_2, 6).value.replace(u' ', u'')
-        if department == department_to_filter:
-            if username in ListUsername:
+        status = sheet_filter_one.cell(item_1, 0).value.strip()
+        if username in ListUsername:
+            if shouli_or_not != 'None' or status in list_status:
                 if type_invention == '发明'.decode('gbk'):
                     data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
-                if type_invention == '实用新型'.decode('gbk'):
+                if type_invention == '新型'.decode('gbk'):
                     data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
+            if type_invention == '发明'.decode('gbk'):
+                data_display['%s' % username]['发明提交数量'.decode('gbk')] += 1
+            if type_invention == '新型'.decode('gbk'):
+                data_display['%s' % username]['实用新型提交数量'.decode('gbk')] += 1
+
+    for item_2 in range(1, total_rows_two):
+        username = sheet_filter_two.cell(item_2, 1).value
+        type_invention = sheet_filter_two.cell(item_2, 6).value.replace(u' ', u'')
+        if username in ListUsername:
+            if type_invention == '发明'.decode('gbk'):
+                data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
+            if type_invention == '实用新型'.decode('gbk'):
+                data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
     SheetOne.set_column("C:F", 15)
     i = 1
     for username in ListUsername:
@@ -154,7 +151,7 @@ def get_data():
 
 Tkinter.Label(root, text='请在如下选择需要处理的处名'.decode('gbk'), bg='Red').grid(row=0, column=0, columnspan=20, padx=5, pady=5)
 box_set_department = ttk.Combobox(root, textvariable=var_char_combox_department,
-                                  values=['浪潮集团浪潮信息测试验证部测试二处'.decode('gbk')])
+                                  values=['测试二处'.decode('gbk')])
 box_set_department.grid(row=1, column=0, columnspan=40, padx=5, pady=5)
 
 Tkinter.Label(root, text='请在如下选择需要处理的专利文件'.decode('gbk'), bg='Red').grid(row=2, column=0, columnspan=20, padx=5, pady=5)
