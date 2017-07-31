@@ -151,7 +151,7 @@ def get_data():
 
 Tkinter.Label(root, text='请在如下选择需要处理的处名'.decode('gbk'), bg='Red').grid(row=0, column=0, columnspan=20, padx=5, pady=5)
 box_set_department = ttk.Combobox(root, textvariable=var_char_combox_department,
-                                  values=['测试二处'.decode('gbk')])
+                                  values=['测试三处'.decode('gbk')])
 box_set_department.grid(row=1, column=0, columnspan=40, padx=5, pady=5)
 
 Tkinter.Label(root, text='请在如下选择需要处理的专利文件'.decode('gbk'), bg='Red').grid(row=2, column=0, columnspan=20, padx=5, pady=5)

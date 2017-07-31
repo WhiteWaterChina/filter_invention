@@ -148,9 +148,9 @@ class InventionFilterAll(wx.Frame):
         global filename_allname
         filename_invention_dialog = wx.FileDialog(self, message="选择人员名单文件".decode('gbk'), defaultDir=os.getcwd(), defaultFile="")
         if filename_invention_dialog.ShowModal() == wx.ID_OK:
-            filename_invention = filename_invention_dialog.GetPath()
-            self.DisplayFilename.SetValue(filename_invention)
-            filename_allname = filename_invention
+            all_name = filename_invention_dialog.GetPath()
+            self.DisplayFilename.SetValue(all_name)
+            filename_allname = all_name
             filename_invention_dialog.Destroy()
 
     def set_filename(self, event):
