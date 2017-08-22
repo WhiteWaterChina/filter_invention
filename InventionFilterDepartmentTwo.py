@@ -17,7 +17,7 @@ import xlsxwriter
 import xlrd
 
 
-filename_original = unicode()
+filename_original_zonglan = unicode()
 dir_filename_display = unicode()
 root = Tkinter.Tk()
 root.title("专利结果过滤工具".decode('gbk'))
@@ -53,7 +53,7 @@ TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明受理数量'.deco
 
 
 def get_filename():
-    global filename_original
+    global filename_original_zonglan
     filename_iometer = tkFileDialog.askopenfilename()
     var_char_entry_filename_need_filter.set(filename_iometer)
     filename_original = filename_iometer
@@ -67,7 +67,7 @@ def set_filename():
 
 def get_data():
     length_team = len(TeamLeader)
-    filename_input = filename_original
+    filename_input = filename_original_zonglan
     department_to_filter = var_char_combox_department.get()
     timestamp = time.strftime('%Y%m%d', time.localtime())
     filename_output = os.path.join(dir_filename_display,

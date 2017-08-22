@@ -254,7 +254,7 @@ class InventionFilterAll(wx.Frame):
                     if type_invention == '实用新型'.decode('gbk'):
                         data_display["%s" % item_chu]['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
 
-        # 处理总览统计数据，查询并统计撰写通过的专利
+        # 处理受理统计数据，查询并统计受理的专利
         file_name_shouli = xlrd.open_workbook(filename_original_shouli, encoding_override='cp936')
         sheet_filter_shouli = file_name_shouli.sheet_by_index(0)
         total_rows_shouli = sheet_filter_shouli.nrows

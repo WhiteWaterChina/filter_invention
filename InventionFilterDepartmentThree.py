@@ -34,9 +34,9 @@ Member5 = ['杨文清'.decode('gbk'), '贠雄斌'.decode('gbk'), '孙薇'.decode('gbk'),
 Member6 = ['伯绍文'.decode('gbk'), '李波'.decode('gbk'), '刘东伟'.decode('gbk'), '吴培琴'.decode('gbk'), '武秋星'.decode('gbk'),
            '胥志泉'.decode('gbk'), '赵召'.decode('gbk'), '李壮'.decode('gbk'), '李俊卿'.decode('gbk')]
 Member7 = ['迟江波'.decode('gbk'), '刘浩君'.decode('gbk'), '李彦华'.decode('gbk'), '韩燕燕'.decode('gbk'),
-           '梁恒勋'.decode('gbk'), '黄锦盛'.decode('gbk')]
+           '梁恒勋'.decode('gbk'), '黄锦盛'.decode('gbk'), '王晓明'.decode('gbk')]
 Member8 = ['李永亮'.decode('gbk'), '李丹'.decode('gbk'), '兰太顺'.decode('gbk')]
-Member9 = ['曹翔'.decode('gbk')]
+Member9 = ['曹翔'.decode('gbk'), '周志超'.decode('gbk')]
 
 TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明受理数量'.decode('gbk'), '发明提交数量'.decode('gbk'),
              '实用新型受理数量'.decode('gbk'), '实用新型提交数量'.decode('gbk')]
