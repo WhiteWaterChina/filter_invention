@@ -38,8 +38,8 @@ Member7 = ['迟江波'.decode('gbk'), '刘浩君'.decode('gbk'), '李彦华'.decode('gbk'
 Member8 = ['李永亮'.decode('gbk'), '李丹'.decode('gbk'), '兰太顺'.decode('gbk')]
 Member9 = ['曹翔'.decode('gbk'), '周志超'.decode('gbk')]
 
-TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明受理数量'.decode('gbk'), '发明提交数量'.decode('gbk'),
-             '实用新型受理数量'.decode('gbk'), '实用新型提交数量'.decode('gbk')]
+TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明提交数量'.decode('gbk'), '发明受理数量'.decode('gbk'),
+             '实用新型提交数量'.decode('gbk'), '实用新型受理数量'.decode('gbk')]
 
 
 class InventionFilterTeamThree(wx.Frame):
@@ -294,10 +294,10 @@ class InventionFilterTeamThree(wx.Frame):
                     data_display['%s' % username_shouli]['实用新型受理数量'.decode('gbk')] += 1
 
         for username in ListUsername:
-            SheetOne.write(i, 2, data_display['%s' % username]['发明受理数量'.decode('gbk')])
-            SheetOne.write(i, 3, data_display['%s' % username]['发明提交数量'.decode('gbk')])
-            SheetOne.write(i, 4, data_display['%s' % username]['实用新型受理数量'.decode('gbk')])
-            SheetOne.write(i, 5, data_display['%s' % username]['实用新型提交数量'.decode('gbk')])
+            SheetOne.write(i, 2, data_display['%s' % username]['发明提交数量'.decode('gbk')])
+            SheetOne.write(i, 3, data_display['%s' % username]['发明受理数量'.decode('gbk')])
+            SheetOne.write(i, 4, data_display['%s' % username]['实用新型提交数量'.decode('gbk')])
+            SheetOne.write(i, 5, data_display['%s' % username]['实用新型受理数量'.decode('gbk')])
             i += 1
         WorkBook.close()
         print time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
