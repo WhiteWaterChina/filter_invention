@@ -32,9 +32,9 @@ Member4 = ['史沛玉'.decode('gbk'), '张超'.decode('gbk'), '张锟'.decode('gbk'), '
            '高莹'.decode('gbk'), '王旭林'.decode('gbk'), '杨惠'.decode('gbk'), '程佳佳'.decode('gbk'), ]
 Member5 = ['杨文清'.decode('gbk'), '贠雄斌'.decode('gbk'), '孙薇'.decode('gbk'), '李静'.decode('gbk'), '杨永峰'.decode('gbk')]
 Member6 = ['伯绍文'.decode('gbk'), '李波'.decode('gbk'), '刘东伟'.decode('gbk'), '吴培琴'.decode('gbk'), '武秋星'.decode('gbk'),
-           '胥志泉'.decode('gbk'), '赵召'.decode('gbk'), '李壮'.decode('gbk'), '李俊卿'.decode('gbk')]
+           '胥志泉'.decode('gbk'), '赵召'.decode('gbk'), '李壮'.decode('gbk'), '李俊卿'.decode('gbk'), '张日洪'.decode('gbk')]
 Member7 = ['迟江波'.decode('gbk'), '刘浩君'.decode('gbk'), '李彦华'.decode('gbk'), '韩燕燕'.decode('gbk'),
-           '梁恒勋'.decode('gbk'), '黄锦盛'.decode('gbk'), '王晓明'.decode('gbk')]
+           '梁恒勋'.decode('gbk'), '黄锦盛'.decode('gbk'), '王晓明'.decode('gbk'), '刘学艳'.decode('gbk')]
 Member8 = ['李永亮'.decode('gbk'), '李丹'.decode('gbk'), '兰太顺'.decode('gbk')]
 Member9 = ['曹翔'.decode('gbk'), '周志超'.decode('gbk')]
 
@@ -213,7 +213,7 @@ class InventionFilterTeamThree(wx.Frame):
         department_to_filter = self.combobox_team.GetValue()
         timestamp = time.strftime('%Y%m%d', time.localtime())
         filename_output = os.path.join(dir_filename_display,
-                                       "%s各组专利完成情况统计-%s.xlsx".decode('gbk') % (department_to_filter, timestamp))
+                                       "%s各人专利完成情况统计-%s.xlsx".decode('gbk') % (department_to_filter, timestamp))
         WorkBook = xlsxwriter.Workbook(filename_output)
         SheetOne = WorkBook.add_worksheet('%s各人专利完成情况统计'.decode('gbk') % department_to_filter)
         format_out = WorkBook.add_format()
