@@ -9,6 +9,7 @@ import os
 import wx
 import wx.xrc
 import xlrd
+import re
 
 DisplayFilename = wx.TextCtrl
 DisplayResultDir = wx.TextCtrl
@@ -225,14 +226,16 @@ class InventionFilterAll(wx.Frame):
         total_rows_two = sheet_filter_two.nrows
 
         list_status = ["撰写通过".decode('gbk')]
+        list_except=["待决定".decode('gbk'), "撰写驳回".decode('gbk')]
         # username = ''
         for item_1 in range(1, total_rows_one):
-            username = sheet_filter_one.cell(item_1, 6).value
-            type_invention = sheet_filter_one.cell(item_1, 4).value.replace(u' ', u'').split(",")[0].strip()
+            username_temp = sheet_filter_one.cell(item_1, 6).value.strip().split(";")[0]
+            username = re.search(r"\D*", username_temp).group()
+            type_invention = sheet_filter_one.cell(item_1, 17).value.strip().split(";")[0]
             # shouli_or_not = sheet_filter_one.cell(item_1, 8).value
-            status = sheet_filter_one.cell(item_1, 0).value.strip()
+            status = sheet_filter_one.cell(item_1, 23).value.strip()
             for item_chu in listDivisionName:
-                if username in namelist["%s" % item_chu]:
+                if username in namelist["%s" % item_chu] and status not in list_except:
                     # if shouli_or_not != 'None' or status in list_status:
                     if status in list_status:
                         if type_invention == '发明'.decode('gbk'):
