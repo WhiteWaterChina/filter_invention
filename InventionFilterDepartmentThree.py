@@ -9,6 +9,7 @@ import os
 import wx
 import wx.xrc
 import xlrd
+import re
 
 DisplayFilename = wx.TextCtrl
 DisplayResultDir = wx.TextCtrl
@@ -66,7 +67,8 @@ class InventionFilterTeamThree(wx.Frame):
 
         bSizer2 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.textctl_zonglan_filename = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize,
+        self.textctl_zonglan_filename = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition,
+                                                    wx.DefaultSize,
                                                     0)
         bSizer2.Add(self.textctl_zonglan_filename, 1, wx.ALL, 5)
 
@@ -77,7 +79,8 @@ class InventionFilterTeamThree(wx.Frame):
 
         bSizer9 = wx.BoxSizer(wx.VERTICAL)
 
-        self.m_staticText4 = wx.StaticText(self, wx.ID_ANY, u"请在如下选择需要处理的专利受理文件", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText4 = wx.StaticText(self, wx.ID_ANY, u"请在如下选择需要处理的专利受理文件", wx.DefaultPosition,
+                                           wx.DefaultSize, 0)
         self.m_staticText4.Wrap(-1)
         self.m_staticText4.SetForegroundColour(wx.Colour(0, 0, 0))
         self.m_staticText4.SetBackgroundColour(wx.Colour(255, 0, 0))
@@ -88,7 +91,8 @@ class InventionFilterTeamThree(wx.Frame):
 
         bSizer10 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.textctl_shouli_filename = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize,
+        self.textctl_shouli_filename = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition,
+                                                   wx.DefaultSize,
                                                    0)
         bSizer10.Add(self.textctl_shouli_filename, 1, wx.ALL, 5)
 
@@ -131,7 +135,8 @@ class InventionFilterTeamThree(wx.Frame):
 
         bSizer7 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.text_dislpay_result = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.text_dislpay_result = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize,
+                                               0)
         bSizer7.Add(self.text_dislpay_result, 1, wx.ALL, 5)
 
         self.ButtonChoseDir = wx.Button(self, wx.ID_ANY, u"选择目录", wx.DefaultPosition, wx.DefaultSize, 0)
@@ -240,6 +245,7 @@ class InventionFilterTeamThree(wx.Frame):
                     i += 1
         data_display = {}
         list_status = ["撰写通过".decode('gbk')]
+        list_except = ["待决定".decode('gbk'), "撰写驳回".decode('gbk')]
         for name in ListUsername:
             data_display['%s' % name] = {}
             data_display['%s' % name]['发明提交数量'.decode('gbk')] = 0
@@ -254,19 +260,20 @@ class InventionFilterTeamThree(wx.Frame):
         total_rows_two = sheet_filter_two.nrows
 
         for item_1 in range(1, total_rows_one):
-            username = sheet_filter_one.cell(item_1, 6).value.replace(u' ', u'')
-            type_invention = sheet_filter_one.cell(item_1, 4).value.replace(u' ', u'')
-            shouli_or_not = sheet_filter_one.cell(item_1, 8).value
-            status = sheet_filter_one.cell(item_1, 0).value.strip()
+            username_temp = sheet_filter_one.cell(item_1, 6).value.strip().split(";")[0]
+            username = re.search(r"\D*", username_temp).group()
+            type_invention = sheet_filter_one.cell(item_1, 17).value.strip().split(";")[0]
+            # shouli_or_not = sheet_filter_one.cell(item_1, 8).value
+            status = sheet_filter_one.cell(item_1, 23).value.strip()
             if username in ListUsername:
-                if status in list_status:
+                if status in list_status :
                     if type_invention == '发明'.decode('gbk'):
                         data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
                     if type_invention == '新型'.decode('gbk'):
                         data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
-                if type_invention == '发明'.decode('gbk'):
+                if type_invention == '发明'.decode('gbk') and status not in list_except:
                     data_display['%s' % username]['发明提交数量'.decode('gbk')] += 1
-                if type_invention == '新型'.decode('gbk'):
+                if type_invention == '新型'.decode('gbk') and status not in list_except:
                     data_display['%s' % username]['实用新型提交数量'.decode('gbk')] += 1
 
         for item_2 in range(1, total_rows_two):
