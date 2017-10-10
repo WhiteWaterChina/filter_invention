@@ -260,13 +260,12 @@ class InventionFilterTeamThree(wx.Frame):
         total_rows_two = sheet_filter_two.nrows
 
         for item_1 in range(1, total_rows_one):
-            username_temp = sheet_filter_one.cell(item_1, 6).value.strip().split(";")[0]
+            username_temp = sheet_filter_one.cell(item_1, 5).value.strip()
             username = re.search(r"\D*", username_temp).group()
-            type_invention = sheet_filter_one.cell(item_1, 17).value.strip().split(";")[0]
-            # shouli_or_not = sheet_filter_one.cell(item_1, 8).value
-            status = sheet_filter_one.cell(item_1, 23).value.strip()
+            type_invention = sheet_filter_one.cell(item_1, 4).value.split(",")[0].strip()
+            status = sheet_filter_one.cell(item_1, 0).value.strip()
             if username in ListUsername:
-                if status in list_status :
+                if status in list_status:
                     if type_invention == '发明'.decode('gbk'):
                         data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
                     if type_invention == '新型'.decode('gbk'):

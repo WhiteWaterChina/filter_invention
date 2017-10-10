@@ -229,14 +229,12 @@ class InventionFilterAll(wx.Frame):
         list_except=["待决定".decode('gbk'), "撰写驳回".decode('gbk')]
         # username = ''
         for item_1 in range(1, total_rows_one):
-            username_temp = sheet_filter_one.cell(item_1, 6).value.strip().split(";")[0]
+            username_temp = sheet_filter_one.cell(item_1, 5).value.strip()
             username = re.search(r"\D*", username_temp).group()
-            type_invention = sheet_filter_one.cell(item_1, 17).value.strip().split(";")[0]
-            # shouli_or_not = sheet_filter_one.cell(item_1, 8).value
-            status = sheet_filter_one.cell(item_1, 23).value.strip()
+            type_invention = sheet_filter_one.cell(item_1, 4).value.split(",")[0].strip()
+            status = sheet_filter_one.cell(item_1, 0).value.strip()
             for item_chu in listDivisionName:
                 if username in namelist["%s" % item_chu] and status not in list_except:
-                    # if shouli_or_not != 'None' or status in list_status:
                     if status in list_status:
                         if type_invention == '发明'.decode('gbk'):
                             data_display["%s" % item_chu]['%s' % username]['发明受理数量'.decode('gbk')] += 1
@@ -273,7 +271,7 @@ class InventionFilterAll(wx.Frame):
 
         # write output excel
         timestamp = time.strftime('%Y%m%d', time.localtime())
-        filename_display = "测试验证部个人专利完成情况统计-%s.xlsx".decode('gbk') % timestamp
+        filename_display = "2017测试验证部个人专利完成情况统计-%s.xlsx".decode('gbk') % timestamp
         filename_final = os.path.join(dir_filename_display, filename_display)
         workbook_to_write = xlsxwriter.Workbook(filename_final)
         formatone = workbook_to_write.add_format()
