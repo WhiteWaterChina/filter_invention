@@ -30,7 +30,7 @@ listTitle = ['发明提交数量'.decode('gbk'), '发明受理数量'.decode('gbk'), '实用新
 
 class InventionFilterAll(wx.Frame):
     def __init__(self, parent):
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"专利结果过滤工具", pos=wx.DefaultPosition, size=wx.Size(387, 355),
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"测试验证部专利结果过滤工具", pos=wx.DefaultPosition, size=wx.Size(387, 355),
                           style=wx.CAPTION | wx.RESIZE_BORDER | wx.TAB_TRAVERSAL)
 
         self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
@@ -260,7 +260,7 @@ class InventionFilterAll(wx.Frame):
         sheet_filter_shouli = file_name_shouli.sheet_by_index(0)
         total_rows_shouli = sheet_filter_shouli.nrows
         for item_shouli in range(1, total_rows_shouli):
-            username_shouli = sheet_filter_shouli.cell(item_shouli, 4).value.strip()
+            username_shouli = sheet_filter_shouli.cell(item_shouli, 5).value.strip()
             type_invention = sheet_filter_shouli.cell(item_shouli, 1).value.split(",")[0].strip()
             for item_chu in listDivisionName:
                 if username_shouli in namelist["%s" % item_chu]:

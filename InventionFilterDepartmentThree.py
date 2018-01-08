@@ -24,7 +24,7 @@ TeamLeader = ['¼Öµº'.decode('gbk'), 'ÅËÁØ'.decode('gbk'), 'º«ÁÕÁÕ'.decode('gbk')
 
 Member0 = ['¼Öµº'.decode('gbk'), 'Àî¹â´ï'.decode('gbk'), 'ÁõÃ¯·å'.decode('gbk'), '·¶Åô·É'.decode('gbk'), 'Ì·¾²¾²'.decode('gbk'),
            'ÕÅÎÄçæ'.decode('gbk'), '´úÈç¾²'.decode('gbk')]
-Member1 = ['ÅËÁØ'.decode('gbk'), 'Áõ²©'.decode('gbk'), '»ÆÒí'.decode('gbk'), '¶­Ï²Ñà'.decode('gbk'), 'ºÂÁ¼êÉ'.decode('gbk')]
+Member1 = ['ÅËÁØ'.decode('gbk'), 'Áõ²©'.decode('gbk'), '»ÆÒí'.decode('gbk'), '¶­Ï²Ñà'.decode('gbk'), 'ºÂÁ¼êÉ'.decode('gbk'), 'ÕÔºéËÎ'.decode('gbk')]
 Member2 = ['º«ÁÕÁÕ'.decode('gbk'), 'ÁÖº£'.decode('gbk'), '²Ü¼Ó·å'.decode('gbk'), 'ÕÅĞĞÎä'.decode('gbk'), 'Àî½¨²¨'.decode('gbk'),
            '·ëÏş½à'.decode('gbk')]
 Member3 = ['ÃçÓÀÍş'.decode('gbk'), 'ãÆË¶'.decode('gbk'), 'ÁõÈğÑ©'.decode('gbk'), 'ÍõÔÆÅô'.decode('gbk'), 'Â¬Õı³¬'.decode('gbk')]
@@ -291,7 +291,7 @@ class InventionFilterTeamThree(wx.Frame):
         sheet_filter_shouli = file_name_shouli.sheet_by_index(0)
         total_rows_shouli = sheet_filter_shouli.nrows
         for item_shouli in range(1, total_rows_shouli):
-            username_shouli = sheet_filter_shouli.cell(item_shouli, 4).value.strip()
+            username_shouli = sheet_filter_shouli.cell(item_shouli, 5).value.strip()
             type_invention = sheet_filter_shouli.cell(item_shouli, 1).value.split(",")[0].strip()
             if username_shouli in ListUsername:
                 if type_invention == '·¢Ã÷'.decode('gbk'):
