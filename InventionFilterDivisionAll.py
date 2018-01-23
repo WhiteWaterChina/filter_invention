@@ -217,7 +217,7 @@ class InventionFilterAll(wx.Frame):
                 data_display["%s" % item_chu]["%s" % name_people]['实用新型提交数量'.decode('gbk')] = 0
                 data_display["%s" % item_chu]["%s" % name_people]['实用新型受理数量'.decode('gbk')] = 0
 
-        # 处理总览统计数据，查询并统计撰写通过的专利
+        # 处理总览统计数据，查询并统计撰写通过的专利和提交信息
         # filename_input = filename_original_zonglan
         file_name = xlrd.open_workbook(filename_original_zonglan, encoding_override='cp936')
         sheet_filter_one = file_name.sheet_by_index(0)
@@ -235,11 +235,13 @@ class InventionFilterAll(wx.Frame):
             status = sheet_filter_one.cell(item_1, 0).value.strip()
             for item_chu in listDivisionName:
                 if username in namelist["%s" % item_chu] and status not in list_except:
-                    if status in list_status:
-                        if type_invention == '发明'.decode('gbk'):
-                            data_display["%s" % item_chu]['%s' % username]['发明受理数量'.decode('gbk')] += 1
-                        if type_invention == '新型'.decode('gbk'):
-                            data_display["%s" % item_chu]['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
+                    # 撰写通过的专利
+                    # if status in list_status:
+                    #     if type_invention == '发明'.decode('gbk'):
+                    #         data_display["%s" % item_chu]['%s' % username]['发明受理数量'.decode('gbk')] += 1
+                    #     if type_invention == '新型'.decode('gbk'):
+                    #         data_display["%s" % item_chu]['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
+                    # 提交专利数量
                     if type_invention == '发明'.decode('gbk'):
                         data_display["%s" % item_chu]['%s' % username]['发明提交数量'.decode('gbk')] += 1
                     if type_invention == '新型'.decode('gbk'):

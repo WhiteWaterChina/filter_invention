@@ -265,11 +265,13 @@ class InventionFilterTeamThree(wx.Frame):
             type_invention = sheet_filter_one.cell(item_1, 4).value.split(",")[0].strip()
             status = sheet_filter_one.cell(item_1, 0).value.strip()
             if username in ListUsername:
-                if status in list_status:
-                    if type_invention == '发明'.decode('gbk'):
-                        data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
-                    if type_invention == '新型'.decode('gbk'):
-                        data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
+                # 撰写通过专利
+                # if status in list_status:
+                #     if type_invention == '发明'.decode('gbk'):
+                #         data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
+                #     if type_invention == '新型'.decode('gbk'):
+                #         data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
+                # 提交专利数量
                 if type_invention == '发明'.decode('gbk') and status not in list_except:
                     data_display['%s' % username]['发明提交数量'.decode('gbk')] += 1
                 if type_invention == '新型'.decode('gbk') and status not in list_except:
