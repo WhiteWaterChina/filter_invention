@@ -18,26 +18,40 @@ filename_original_shouli = unicode()
 filename_allname = unicode()
 dir_filename_display = unicode()
 
-TeamLeader = ['贾岛'.decode('gbk'), '潘霖'.decode('gbk'), '韩琳琳'.decode('gbk'), '苗永威'.decode('gbk'),
+TeamLeader = ['贾岛'.decode('gbk'), '潘霖'.decode('gbk'), '韩琳琳'.decode('gbk'), '卢正超'.decode('gbk'),
               '史沛玉'.decode('gbk'), '杨文清'.decode('gbk'), '伯绍文'.decode('gbk'), '迟江波'.decode('gbk'), '李永亮'.decode('gbk'),
               '曹翔'.decode('gbk')]
 
 Member0 = ['贾岛'.decode('gbk'), '李光达'.decode('gbk'), '刘茂峰'.decode('gbk'), '范鹏飞'.decode('gbk'), '谭静静'.decode('gbk'),
-           '张文珂'.decode('gbk'), '代如静'.decode('gbk')]
-Member1 = ['潘霖'.decode('gbk'), '刘博'.decode('gbk'), '黄翼'.decode('gbk'), '董喜燕'.decode('gbk'), '郝良晟'.decode('gbk'), '赵洪宋'.decode('gbk')]
-Member2 = ['韩琳琳'.decode('gbk'), '林海'.decode('gbk'), '曹加峰'.decode('gbk'), '张行武'.decode('gbk'), '李建波'.decode('gbk'),
+           '张文珂'.decode('gbk')]
+
+Member1 = ['潘霖'.decode('gbk'), '刘博'.decode('gbk'), '黄翼'.decode('gbk'), '董喜燕'.decode('gbk'), '郝良晟'.decode('gbk'),
+           '赵洪宋'.decode('gbk'), '郭淑珍'.decode('gbk'), '刘鑫'.decode('gbk'), '吕萌'.decode('gbk')]
+
+Member2 = ['韩琳琳'.decode('gbk'), '于广龙'.decode('gbk'), '曹加峰'.decode('gbk'), '张行武'.decode('gbk'), '李思达'.decode('gbk'),
            '冯晓洁'.decode('gbk')]
-Member3 = ['苗永威'.decode('gbk'), '闫硕'.decode('gbk'), '刘瑞雪'.decode('gbk'), '王云鹏'.decode('gbk'), '卢正超'.decode('gbk')]
-Member4 = ['史沛玉'.decode('gbk'), '张超'.decode('gbk'), '张锟'.decode('gbk'), '刘智刚'.decode('gbk'), '巩祥文'.decode('gbk'),
+
+Member3 = ['卢正超'.decode('gbk'), '闫硕'.decode('gbk'), '刘瑞雪'.decode('gbk'), '王云鹏'.decode('gbk'), '彭笑笑'.decode('gbk')]
+
+Member4 = ['史沛玉'.decode('gbk'), '刘辉'.decode('gbk'), '张锟'.decode('gbk'), '刘智刚'.decode('gbk'), '巩祥文'.decode('gbk'),
            '孙玉超'.decode('gbk'), '韩超'.decode('gbk'), '徐伟超'.decode('gbk'), '赵盛'.decode('gbk'), '王建刚'.decode('gbk'),
-           '高莹'.decode('gbk'), '王旭林'.decode('gbk'), '杨惠'.decode('gbk'), '程佳佳'.decode('gbk'), ]
-Member5 = ['杨文清'.decode('gbk'), '贠雄斌'.decode('gbk'), '孙薇'.decode('gbk'), '李静'.decode('gbk'), '杨永峰'.decode('gbk')]
+           '高莹'.decode('gbk'), '王旭林'.decode('gbk'), '杨惠'.decode('gbk'), '程佳佳'.decode('gbk'), '邱健'.decode('gbk'),
+           '周磊'.decode('gbk')]
+
+Member5 = ['杨文清'.decode('gbk'), '贠雄斌'.decode('gbk'), '孙薇'.decode('gbk'), '李静'.decode('gbk'), '杨永峰'.decode('gbk'),
+           '黄三保'.decode('gbk')]
+
 Member6 = ['伯绍文'.decode('gbk'), '李波'.decode('gbk'), '刘东伟'.decode('gbk'), '吴培琴'.decode('gbk'), '武秋星'.decode('gbk'),
-           '胥志泉'.decode('gbk'), '赵召'.decode('gbk'), '李壮'.decode('gbk'), '李俊卿'.decode('gbk'), '张日洪'.decode('gbk')]
+           '王龙镇'.decode('gbk'), '李壮'.decode('gbk'), '李俊卿'.decode('gbk'), '张日洪'.decode('gbk'), '丁宇翔'.decode('gbk'),
+           '孙静静'.decode('gbk')]
+
 Member7 = ['迟江波'.decode('gbk'), '刘浩君'.decode('gbk'), '李彦华'.decode('gbk'), '韩燕燕'.decode('gbk'),
-           '梁恒勋'.decode('gbk'), '黄锦盛'.decode('gbk'), '王晓明'.decode('gbk'), '刘学艳'.decode('gbk')]
+           '梁恒勋'.decode('gbk'), '黄锦盛'.decode('gbk'), '毛心宇'.decode('gbk'), '刘学艳'.decode('gbk'),
+           '黄一兴'.decode('gbk'), '张文龙'.decode('gbk')]
+
 Member8 = ['李永亮'.decode('gbk'), '李丹'.decode('gbk'), '兰太顺'.decode('gbk')]
-Member9 = ['曹翔'.decode('gbk'), '周志超'.decode('gbk')]
+
+Member9 = ['曹翔'.decode('gbk')]
 
 TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明提交数量'.decode('gbk'), '发明受理数量'.decode('gbk'),
              '实用新型提交数量'.decode('gbk'), '实用新型受理数量'.decode('gbk')]
