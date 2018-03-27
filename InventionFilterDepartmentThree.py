@@ -19,8 +19,7 @@ filename_allname = unicode()
 dir_filename_display = unicode()
 
 TeamLeader = ['贾岛'.decode('gbk'), '潘霖'.decode('gbk'), '韩琳琳'.decode('gbk'), '卢正超'.decode('gbk'),
-              '史沛玉'.decode('gbk'), '杨文清'.decode('gbk'), '伯绍文'.decode('gbk'), '迟江波'.decode('gbk'), '李永亮'.decode('gbk'),
-              '曹翔'.decode('gbk')]
+              '史沛玉'.decode('gbk'), '杨文清'.decode('gbk'), '伯绍文'.decode('gbk'), '迟江波'.decode('gbk'), '李永亮'.decode('gbk')]
 
 Member0 = ['贾岛'.decode('gbk'), '李光达'.decode('gbk'), '刘茂峰'.decode('gbk'), '范鹏飞'.decode('gbk'), '谭静静'.decode('gbk'),
            '张文珂'.decode('gbk')]
@@ -51,7 +50,7 @@ Member7 = ['迟江波'.decode('gbk'), '刘浩君'.decode('gbk'), '李彦华'.decode('gbk'
 
 Member8 = ['李永亮'.decode('gbk'), '李丹'.decode('gbk'), '兰太顺'.decode('gbk')]
 
-Member9 = ['曹翔'.decode('gbk')]
+#Member9 = ['曹翔'.decode('gbk')]
 
 TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明提交数量'.decode('gbk'), '发明受理数量'.decode('gbk'),
              '实用新型提交数量'.decode('gbk'), '实用新型受理数量'.decode('gbk')]
@@ -207,15 +206,15 @@ class InventionFilterTeamThree(wx.Frame):
             filename_original_shouli = filename_invention
             filename_invention_dialog.Destroy()
 
-    def get_allname(self, event):
-        global filename_allname
-        filename_invention_dialog = wx.FileDialog(self, message="选择人员名单文件".decode('gbk'), defaultDir=os.getcwd(),
-                                                  defaultFile="")
-        if filename_invention_dialog.ShowModal() == wx.ID_OK:
-            all_name = filename_invention_dialog.GetPath()
-            self.textctrl_allname.SetValue(all_name)
-            filename_allname = all_name
-            filename_invention_dialog.Destroy()
+    # def get_allname(self, event):
+    #     global filename_allname
+    #     filename_invention_dialog = wx.FileDialog(self, message="选择人员名单文件".decode('gbk'), defaultDir=os.getcwd(),
+    #                                               defaultFile="")
+    #     if filename_invention_dialog.ShowModal() == wx.ID_OK:
+    #         all_name = filename_invention_dialog.GetPath()
+    #         self.textctrl_allname.SetValue(all_name)
+    #         filename_allname = all_name
+    #         filename_invention_dialog.Destroy()
 
     def set_filename(self, event):
         global dir_filename_display
@@ -270,8 +269,8 @@ class InventionFilterTeamThree(wx.Frame):
         sheet_filter_one = file_name.sheet_by_index(0)
         total_rows_one = sheet_filter_one.nrows
 
-        sheet_filter_two = file_name.sheet_by_index(1)
-        total_rows_two = sheet_filter_two.nrows
+        # sheet_filter_two = file_name.sheet_by_index(1)
+        # total_rows_two = sheet_filter_two.nrows
 
         for item_1 in range(1, total_rows_one):
             username_temp = sheet_filter_one.cell(item_1, 5).value.strip()
@@ -291,14 +290,14 @@ class InventionFilterTeamThree(wx.Frame):
                 if type_invention == '新型'.decode('gbk') and status not in list_except:
                     data_display['%s' % username]['实用新型提交数量'.decode('gbk')] += 1
 
-        for item_2 in range(1, total_rows_two):
-            username = sheet_filter_two.cell(item_2, 1).value
-            type_invention = sheet_filter_two.cell(item_2, 6).value.replace(u' ', u'')
-            if username in ListUsername:
-                if type_invention == '发明'.decode('gbk'):
-                    data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
-                if type_invention == '实用新型'.decode('gbk'):
-                    data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
+        # for item_2 in range(1, total_rows_two):
+        #     username = sheet_filter_two.cell(item_2, 1).value
+        #     type_invention = sheet_filter_two.cell(item_2, 6).value.replace(u' ', u'')
+        #     if username in ListUsername:
+        #         if type_invention == '发明'.decode('gbk'):
+        #             data_display['%s' % username]['发明受理数量'.decode('gbk')] += 1
+        #         if type_invention == '实用新型'.decode('gbk'):
+        #             data_display['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
         SheetOne.set_column("C:F", 15)
         i = 1
 
