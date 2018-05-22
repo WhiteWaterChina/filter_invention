@@ -259,7 +259,7 @@ class InventionFilterTeamThree(wx.Frame):
                     i += 1
         data_display = {}
         list_status = ["撰写通过".decode('gbk')]
-        list_except = ["待决定".decode('gbk'), "撰写驳回".decode('gbk')]
+        list_except = ["待决定".decode('gbk'), "撰写驳回".decode('gbk'), '提案中'.decode('gbk')]
         for name in ListUsername:
             data_display['%s' % name] = {}
             data_display['%s' % name]['发明提交数量'.decode('gbk')] = 0

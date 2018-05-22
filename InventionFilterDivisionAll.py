@@ -23,6 +23,7 @@ listDivisionName = ['²âÊÔÒ»´¦'.decode('gbk'), '²âÊÔ¶ş´¦'.decode('gbk'), '²âÊÔÈı´
 listTitle = ['·¢Ã÷Ìá½»ÊıÁ¿'.decode('gbk'), '·¢Ã÷ÊÜÀíÊıÁ¿'.decode('gbk'), 'ÊµÓÃĞÂĞÍÌá½»ÊıÁ¿'.decode('gbk'), 'ÊµÓÃĞÂĞÍÊÜÀíÊıÁ¿'.decode('gbk')]
 
 
+
 # namelist = {}
 # for index_chu, item_chu in enumerate(listDivisionName):
 #     namelist["%s" % item_chu ] = {}
@@ -226,7 +227,8 @@ class InventionFilterAll(wx.Frame):
         # total_rows_two = sheet_filter_two.nrows
 
         list_status = ["×«Ğ´Í¨¹ı".decode('gbk')]
-        list_except=["´ı¾ö¶¨".decode('gbk'), "×«Ğ´²µ»Ø".decode('gbk')]
+        list_status_except = ['Ìá°¸ÖĞ'.decode('gbk')]
+        list_except=["´ı¾ö¶¨".decode('gbk'), "×«Ğ´²µ»Ø".decode('gbk'), 'Ìá°¸ÖĞ'.decode('gbk')]
         # username = ''
         for item_1 in range(1, total_rows_one):
             username_temp = sheet_filter_one.cell(item_1, 5).value.strip()
