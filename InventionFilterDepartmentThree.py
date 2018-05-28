@@ -129,7 +129,7 @@ class InventionFilterTeamThree(wx.Frame):
         bSizer81 = wx.BoxSizer(wx.HORIZONTAL)
 
         combobox_teamChoices = [u"测试三处"]
-        self.combobox_team = wx.ComboBox(self, wx.ID_ANY, u"测试三处", wx.DefaultPosition, wx.DefaultSize,
+        self.combobox_team = wx.ComboBox(self, wx.ID_ANY, u"测试二处济南", wx.DefaultPosition, wx.DefaultSize,
                                          combobox_teamChoices, 0)
         self.combobox_team.SetSelection(0)
         bSizer81.Add(self.combobox_team, 1, wx.ALL, 5)
