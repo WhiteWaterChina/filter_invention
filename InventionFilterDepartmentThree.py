@@ -59,7 +59,7 @@ TitleItem = ['组长名'.decode('gbk'), '组员名'.decode('gbk'), '发明提交数量'.deco
 
 class InventionFilterTeamThree(wx.Frame):
     def __init__(self, parent):
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"测试三处专利结果过滤工具", pos=wx.DefaultPosition,
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"测试二处济南专利结果过滤工具", pos=wx.DefaultPosition,
                           size=wx.Size(387, 355), style=wx.CAPTION | wx.RESIZE_BORDER | wx.TAB_TRAVERSAL)
 
         self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
@@ -128,7 +128,7 @@ class InventionFilterTeamThree(wx.Frame):
 
         bSizer81 = wx.BoxSizer(wx.HORIZONTAL)
 
-        combobox_teamChoices = [u"测试三处"]
+        combobox_teamChoices = [u"测试二处济南"]
         self.combobox_team = wx.ComboBox(self, wx.ID_ANY, u"测试二处济南", wx.DefaultPosition, wx.DefaultSize,
                                          combobox_teamChoices, 0)
         self.combobox_team.SetSelection(0)
