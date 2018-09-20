@@ -9,7 +9,6 @@ import os
 import wx
 import wx.xrc
 import xlrd
-import re
 
 DisplayFilename = wx.TextCtrl
 DisplayResultDir = wx.TextCtrl
@@ -21,8 +20,6 @@ dir_filename_display = unicode()
 listDivisionName = ['测试一处'.decode('gbk'), '测试二处-北京'.decode('gbk'), '测试二处-济南'.decode('gbk'), '测试三处'.decode('gbk'),
                     '测试四处'.decode('gbk'), '测试五处'.decode('gbk'), '测试六处'.decode('gbk')]
 listTitle = ['发明提交数量'.decode('gbk'), '发明受理数量'.decode('gbk'), '实用新型提交数量'.decode('gbk'), '实用新型受理数量'.decode('gbk')]
-
-
 
 # namelist = {}
 # for index_chu, item_chu in enumerate(listDivisionName):
@@ -199,24 +196,27 @@ class InventionFilterAll(wx.Frame):
         print time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         filename_name = xlrd.open_workbook(filename_allname, encoding_override='cp936')
         namelist = {}
+        emaillist = {}
         data_display = {}
         # 处理人员名称
         for item_chu in listDivisionName:
-            namelist["%s" % item_chu] = []
+            emaillist["%s" % item_chu] = []
         for item_chu in listDivisionName:
             handler_sheet = filename_name.sheet_by_name(item_chu)
             total_rows = handler_sheet.nrows
             data_display["%s" % item_chu] = {}
             for index_name in range(0, total_rows):
                 name_people = handler_sheet.cell(index_name, 0).value.replace(u' ', u'').strip()
-                if name_people not in namelist["%s" % item_chu]:
-                    namelist["%s" % item_chu].append(name_people)
-                name_people = handler_sheet.cell(index_name, 0).value.replace(u' ', u'').strip()
-                data_display["%s" % item_chu]["%s" % name_people] = {}
-                data_display["%s" % item_chu]["%s" % name_people]['发明提交数量'.decode('gbk')] = 0
-                data_display["%s" % item_chu]["%s" % name_people]['发明受理数量'.decode('gbk')] = 0
-                data_display["%s" % item_chu]["%s" % name_people]['实用新型提交数量'.decode('gbk')] = 0
-                data_display["%s" % item_chu]["%s" % name_people]['实用新型受理数量'.decode('gbk')] = 0
+                email_people = handler_sheet.cell(index_name, 1).value.replace(u' ', u'').strip()
+                if email_people not in emaillist["%s" % item_chu]:
+                    emaillist["%s" % item_chu].append(email_people)
+                # name_people = handler_sheet.cell(index_name, 0).value.replace(u' ', u'').strip()
+                data_display["%s" % item_chu]["%s" % email_people] = {}
+                data_display["%s" % item_chu]["%s" % email_people]['发明提交数量'.decode('gbk')] = 0
+                data_display["%s" % item_chu]["%s" % email_people]['发明受理数量'.decode('gbk')] = 0
+                data_display["%s" % item_chu]["%s" % email_people]['实用新型提交数量'.decode('gbk')] = 0
+                data_display["%s" % item_chu]["%s" % email_people]['实用新型受理数量'.decode('gbk')] = 0
+                data_display["%s" % item_chu]["%s" % email_people]['发明人名字'.decode('gbk')] = name_people
 
         # 处理总览统计数据，查询并统计撰写通过的专利和提交信息
         # filename_input = filename_original_zonglan
@@ -228,15 +228,16 @@ class InventionFilterAll(wx.Frame):
 
         list_status = ["撰写通过".decode('gbk')]
         list_status_except = ['提案中'.decode('gbk')]
-        list_except=["待决定".decode('gbk'), "撰写驳回".decode('gbk'), '提案中'.decode('gbk')]
-        # username = ''
+        list_except = ["待决定".decode('gbk'), "撰写驳回".decode('gbk'), '提案中'.decode('gbk')]
         for item_1 in range(1, total_rows_one):
-            username_temp = sheet_filter_one.cell(item_1, 5).value.strip()
-            username = re.search(r"\D*", username_temp).group()
+            # username_temp = sheet_filter_one.cell(item_1, 5).value.strip()
+            # username = re.search(r"\D*", username_temp).group()
+            email = sheet_filter_one.cell(item_1, 14).value.strip()
             type_invention = sheet_filter_one.cell(item_1, 4).value.split(",")[0].strip()
             status = sheet_filter_one.cell(item_1, 0).value.strip()
             for item_chu in listDivisionName:
-                if username in namelist["%s" % item_chu] and status not in list_except:
+                # if username in namelist["%s" % item_chu] and status not in list_except:
+                if email in emaillist["%s" % item_chu] and status not in list_except:
                     # 撰写通过的专利
                     # if status in list_status:
                     #     if type_invention == '发明'.decode('gbk'):
@@ -245,9 +246,9 @@ class InventionFilterAll(wx.Frame):
                     #         data_display["%s" % item_chu]['%s' % username]['实用新型受理数量'.decode('gbk')] += 1
                     # 提交专利数量
                     if type_invention == '发明'.decode('gbk'):
-                        data_display["%s" % item_chu]['%s' % username]['发明提交数量'.decode('gbk')] += 1
+                        data_display["%s" % item_chu]['%s' % email]['发明提交数量'.decode('gbk')] += 1
                     if type_invention == '新型'.decode('gbk'):
-                        data_display["%s" % item_chu]['%s' % username]['实用新型提交数量'.decode('gbk')] += 1
+                        data_display["%s" % item_chu]['%s' % email]['实用新型提交数量'.decode('gbk')] += 1
 
         # for item_2 in range(1, total_rows_two):
         #     username = sheet_filter_two.cell(item_2, 1).value
@@ -264,14 +265,16 @@ class InventionFilterAll(wx.Frame):
         sheet_filter_shouli = file_name_shouli.sheet_by_index(0)
         total_rows_shouli = sheet_filter_shouli.nrows
         for item_shouli in range(1, total_rows_shouli):
-            username_shouli = sheet_filter_shouli.cell(item_shouli, 5).value.strip()
+            # username_shouli = sheet_filter_shouli.cell(item_shouli, 5).value.strip()
             type_invention = sheet_filter_shouli.cell(item_shouli, 1).value.split(",")[0].strip()
+            email_shouli = sheet_filter_shouli.cell(item_shouli, 10).value.strip()
             for item_chu in listDivisionName:
-                if username_shouli in namelist["%s" % item_chu]:
+                # if username_shouli in namelist["%s" % item_chu]:
+                if email_shouli in emaillist["%s" % item_chu]:
                     if type_invention == '发明'.decode('gbk'):
-                        data_display["%s" % item_chu]['%s' % username_shouli]['发明受理数量'.decode('gbk')] += 1
+                        data_display["%s" % item_chu]['%s' % email_shouli]['发明受理数量'.decode('gbk')] += 1
                     if type_invention == '新型'.decode('gbk'):
-                        data_display["%s" % item_chu]['%s' % username_shouli]['实用新型受理数量'.decode('gbk')] += 1
+                        data_display["%s" % item_chu]['%s' % email_shouli]['实用新型受理数量'.decode('gbk')] += 1
 
         # write output excel
         timestamp = time.strftime('%Y%m%d', time.localtime())
@@ -288,9 +291,9 @@ class InventionFilterAll(wx.Frame):
             for i in range(1, len(listTitle) + 1):
                 sheet_now.write(0, i, listTitle[i - 1], formatone)
 
-            for index, item_sheet_one in enumerate(namelist["%s" % item_chu]):
+            for index, item_sheet_one in enumerate(emaillist["%s" % item_chu]):
                 line_count = index + 1
-                sheet_now.write(line_count, 0, item_sheet_one, formatone)
+                sheet_now.write(line_count, 0, data_display["%s" % item_chu]['%s' % item_sheet_one]['发明人名字'.decode('gbk')], formatone)
                 sheet_now.write(line_count, 1,
                                 data_display["%s" % item_chu]['%s' % item_sheet_one]['发明提交数量'.decode('gbk')], formatone)
                 sheet_now.write(line_count, 2,
